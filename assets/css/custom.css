@@ -1,0 +1,223 @@
+body {
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+
+    /* background-image: url(../img/bg1.jpg); */
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: ghostwhite;
+    height: 100%;
+
+    font-family:"Arial", sans-serif;
+    font-size:17px;
+}
+.emphasis {
+    color: blue;
+    font-weight: bold;
+}
+
+/******HEADER******/
+#titleName{
+    text-shadow: 2px 2px 2px midnightblue;
+    color: darkslateblue;
+    text-align: center;
+    font-family: Raleway Dots;
+}
+
+.aboutLinks {
+    text-align: center;
+    align-items: center;
+}
+
+.link {
+    padding: 30px;
+}
+
+/******BORDER******/
+
+.ingredientsBorder {
+    padding: 20px;
+}
+
+/******DEFAULT CHANGE AND HOME PG******/
+
+#mainHeader {
+    font-family:"Poppins", sans-serif;
+    padding-top: 50px;
+    font-size: 100px;
+}
+
+.downloadOptions{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: rebeccapurple;
+}
+
+h3 {
+    font-family: "Poppins", sans-serif;
+    color: midnightblue;
+}
+
+.subsubHeader {
+    font-family: "Poppins", sans-serif;
+    color:rebeccapurple;
+    font-size: 20px;
+}
+/******HOWTO******/
+
+.pageMainHeader {
+    font-family: "Poppins";
+    color: midnightblue;
+    text-align: center;
+    font-size: 45px;
+}
+
+.sectionHeader{
+    font-family: "Poppins", sans-serif;
+    color: rebeccapurple;
+}
+
+.subHeader{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: midnightblue;
+}
+
+.howToText {
+    margin-left: 3em;
+}
+
+/******DEFAULT******/
+
+a {
+    color: purple;
+}
+
+a:hover{
+    color: rebeccapurple;
+    text-decoration: none;
+}
+
+a.title {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.title:hover{
+    color:inherit;
+}
+
+/******TOC******/
+/*
+adapted from: https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217
+*/
+
+#toc_container {
+    background: #edfaff none repeat scroll 0 0;
+    border: 1px dashed black;
+    display: table;
+    margin-bottom: 1em;
+    padding: 15px;
+    width: auto;
+}
+
+.toc_title {
+    font-weight: 700;
+    text-align: center;
+}
+
+/******UPLOAD FORM******/
+#uploadInputWrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#uploadFileInfo {
+    width: 200px;
+}
+
+/******DOWNLOAD FORM******/
+
+/* adding to bootstrap*/
+.form-control{
+    width: 150px;
+}
+
+/* adding to default? */
+.radio {
+    font-family: "Roboto", sans-serif;
+}
+
+.filenameInputWrapper {
+    margin-right: 5px;
+}
+
+.formClass {
+    display: flex;
+    flex-direction: row;
+    padding-right: 30px;
+}
+
+.btn-custom{
+    background: skyblue;
+    color: midnightblue;
+    font-family: Poppins;
+}
+
+/*label, input {*/
+/*display: block; !* 1. oh noes, my inputs are styled as block... *!*/
+/*}*/
+
+/******QUICK COMPARE AND SCRAPER******/
+.textAreaLabel {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: midnightblue;
+}
+
+h2 {
+    font-family: "Poppins", sans-serif;
+    color: midnightblue;
+}
+/******TABLE******/
+.table {
+    width: 60%;
+}
+
+/* table border override */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: lightblue;
+}
+
+/* table border override */
+*:focus {
+    outline: 0 !important;
+}
+
+/* header */
+.table > thead > tr > th {
+    border-bottom: 2px solid white;
+}
+/* rows */
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid white;
+}
+
+
+/******HOWTO******/
+#textDiv{
+    display:flex;
+    align-items: center;
+    justify-content: left;
+}
+
+
+
+
+
