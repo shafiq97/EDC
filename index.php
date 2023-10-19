@@ -5,6 +5,14 @@
   <meta content="text/html; charset=utf-8" http-equiv="content-type" />
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
   <title>EDC FREE SOLUTIONS</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include DataTables JavaScript -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
   <meta name="description" content="Decode skincare ingredients fast with our science-based but easy-to-understand explanations. Analyze ingredient lists at a press of a button." />
   <link rel="preload" as="font" href="https://incidecoder-assets.storage.googleapis.com/assets/css/fonts/klavika-regular-webfont.woff" type="font/woff" crossorigin="anonymous" />
   <link rel="preload" as="font" href="https://incidecoder-assets.storage.googleapis.com/assets/css/fonts/klavika-bold-webfont.woff" type="font/woff" crossorigin="anonymous" />
@@ -213,11 +221,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   ?>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        alert("Warning: Contains potential endocrine disruptors!");
         Swal.fire('Warning: Contains potential endocrine disruptors!')
       });
+      document.addEventListener("DOMContentLoaded", function() {
+        <?php if (!empty($results)) : ?>
+          console.log(<?php echo json_encode($results); ?>); // Debugging line
+          var resultsData = <?php echo json_encode($results); ?>;
+          // Initialize DataTable
+          $('#resultsTable').DataTable({
+            data: resultsData,
+            columns: [{
+                data: 'name',
+                title: 'Name'
+              },
+              {
+                data: 'description',
+                title: 'Description'
+              },
+              {
+                data: 'reference',
+                title: 'Reference'
+              },
+              {
+                data: 'link',
+                title: 'Link',
+                render: function(data, type, row) {
+                  if (type === 'display') {
+                    return '<a href="' + data + '" target="_blank">Link</a>';
+                  }
+                  return data;
+                }
+              }
+            ]
+          });
+        <?php endif; ?>
+      });
     </script>
-
 <?php
 
   }
@@ -295,8 +334,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="marginbottoml">
             <div class="searchform hideonmobil">
               <form ingredientForm method="post" action="" class="form">
+
                 <input id="checkIngredients" name="ingredients" type="text" placeholder="Check Ingredient" />
+                <table id="resultsTable" class="display">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Reference</th>
+                      <th>Link</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
                 <input id="submitButton" type="submit" value="" class="" />
+
                 <div id="result"></div>
                 <select name="" id="testType">
                   <option value="">Select Type</option>
@@ -304,7 +356,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <option value="B">Type B</option>
                   <option value="C">Type C</option>
                 </select>
-                <textarea style="height: 200px" id="query" name="query"></textarea>
+                <textarea style="height: 200px" id="ingredients" name="query"></textarea>
               </form>
             </div>
 
@@ -784,6 +836,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://incidecoder-assets.storage.googleapis.com/assets/bundles/js/vendors.b48bd4b608a5eacb6abc.js" crossorigin="anonymous" nonce="6Vqs_GnOd7fOXGNsxPSzqtiWRe3Q2U4Kj9DbOcjMT2Y"></script>
   <script src="https://incidecoder-assets.storage.googleapis.com/assets/bundles/js/base.b18071fe6e4adbb07534.js" crossorigin="anonymous" nonce="6Vqs_GnOd7fOXGNsxPSzqtiWRe3Q2U4Kj9DbOcjMT2Y"></script>
   <script src="https://incidecoder-assets.storage.googleapis.com/assets/bundles/js/home.e29c59a730c7f8c0c9da.js" crossorigin="anonymous" nonce="6Vqs_GnOd7fOXGNsxPSzqtiWRe3Q2U4Kj9DbOcjMT2Y"></script>
+  <script>
+    // Add an event listener to the testType dropdown
+    document.getElementById('testType').addEventListener('change', function() {
+      var selectedOption = this.value;
+      testIngredients(selectedOption);
+    });
+
+    function testIngredients(testType) {
+      // Get the textarea element
+      var ingredientsTextarea = document.getElementById('ingredients');
+
+      if (testType === 'A') {
+        // Set Ingredients A text
+        ingredientsTextarea.value = "Cetearyl Alcohol, Water, Glycerin, Dimethicone, Alcohol Denat., Phenoxyethanol, Fragrance, Glyceryl Glucoside, Glyceryl Stearate Citrate, Distarch Phosphate, Sodium Carbomer, Caprylic/Capric Triglyceride, Persea Gratissima (Avocado) Oil, Vitis Vinifera (Grape) Seed Oil, Tocopheryl Acetate (Vitamin E), C15-19 Alkane, Glyceryl Stearate SE, Dicaprylyl Ether, Sodium Cetearyl Sulfate, Isopropyl Palmitate, Carbomer, Trisodium EDTA, Simmondsia Chinensis (Jojoba) Seed Oil, Sodium Hydroxide, Linalool, Benzyl Alcohol, Citronellol, Alpha-Isomethyl Ionone, Limonene, Geraniol";
+      } else if (testType === 'B') {
+        // Set Ingredients B text
+        ingredientsTextarea.value = "Methylparaben, Butylparaben, Salicylic Acid, Triclocarban, Triclosan";
+      } else if (testType === 'C') {
+        // Set Ingredients C text
+        ingredientsTextarea.value = "Water, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Sodium Lauroamphoacetate, Sodium Gluconate, Sodium Lactate, Acrylates Copolymer, Disodium Laureth Sulfosuccinate, PEG-7 Glyceryl Cocoate, Styrene/​Acrylates Copolymer, Glycerin, Fragrance, Lactic Acid, Triclosan, PEG-45M, Chamomilla Recutita (Matricaria) Flower Extract, Niacinamide, Calcium Pantothenate, Sodium Ascorbyl Phosphate, Pyridoxine Hcl, Tocopheryl Acetate (Vitamin E), Tetrasodium EDTA, Sodium Chloride, Methylchloroisothiazolinone, Methylisothiazolinone";
+      }
+    }
+  </script>
+
+
 </body>
 
 </html>
