@@ -254,6 +254,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               }
             ]
           });
+          $('#resultsTable').css('display', 'table'); // Change the display property to "table"
+
         <?php endif; ?>
       });
     </script>
@@ -336,7 +338,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <form ingredientForm method="post" action="" class="form">
 
                 <input id="checkIngredients" name="ingredients" type="text" placeholder="Check Ingredient" />
-                <table id="resultsTable" class="display">
+                <table style="display: none;" id="resultsTable" class="display">
                   <thead>
                     <tr>
                       <th>Name</th>
